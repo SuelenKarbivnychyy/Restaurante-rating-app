@@ -1,0 +1,6 @@
+Sporta:5
+La Fitness:4
+Aqua Sports:3
+Ritmos Dance:2
+La Casa:5
+Zebra Room:4
