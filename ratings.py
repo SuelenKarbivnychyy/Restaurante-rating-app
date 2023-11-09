@@ -30,21 +30,21 @@ def read_file(filename):
         return content
     
 
-def dict_restaurantes(content):
+def dict_restaurants(content):
     """Split up the content into a dictionary"""   
 
-    restaurantes_rate = {}
+    restaurants_rate = {}
 
-    for restaurante in content:
-            restaurante_splited = restaurante.rstrip().split(":")
-            restaurante_name, rate = restaurante_splited[0:2]
-            restaurantes_rate[restaurante_name] = int(rate)
-
-
-    return restaurantes_rate
+    for restaurant in content:
+            restaurant_splited = restaurant.rstrip().split(":")
+            restaurant_name, rate = restaurant_splited[0:2]
+            restaurants_rate[restaurant_name] = int(rate)
 
 
-def print_restaurante_and_rate(content):
+    return restaurants_rate
+
+
+def print_restaurant_and_rate(content):
     """Splits out the ratings in alphabetical order by restaurant,
      
     The result should should be like ...
@@ -63,10 +63,9 @@ def print_restaurante_and_rate(content):
 def choose_file(list_of_files):
     """Ask the user which file to work on"""
 
-    counter = 0
-    for file in list_of_files:
-        counter += 1
-        print(f"{counter}. {file}")
+
+    for num in range(0, len(list_of_files)):
+        print(f"{num}. {list_of_files[num]}")
 
 
     work_file = int(input(f"Press the number of file you would you like to open: "))
@@ -80,14 +79,14 @@ def choose_file(list_of_files):
 def prepare_data(file):
     """Prapare the data to work on the program"""
     
-    updated_restaurantes = []
-    restaurante_data = read_file(file)
+    updated_restaurants = []
+    restaurant_data = read_file(file)
 
-    for data in restaurante_data:
-        updated_restaurantes.append(data)
+    for data in restaurant_data:
+        updated_restaurants.append(data)
 
 
-    return updated_restaurantes
+    return updated_restaurants
      
 
 
@@ -100,15 +99,15 @@ while True:
     
     user_choice = int(input('''\nIf you would like to See all the ratings, press 1,\nTo Add a new Item and Rate, press 2,\nTo update an Item rating press 3, \nTo open another file press 4, \nOr press any other key to Quit: \n'''))    
 
-    restaurantes_and_rates = dict_restaurantes(data)  
+    restaurants_and_rates = dict_restaurants(data)  
     
             
     if user_choice == 1:
         print("\n")
-        print_restaurante_and_rate(restaurantes_and_rates) 
+        print_restaurant_and_rate(restaurants_and_rates) 
 
     elif user_choice == 2:
-        user_restaurante = input("\nEnter a new Item: ").title()      
+        user_restaurant = input("\nEnter a new Item: ").title()      
 
         while True:           
             user_rate = input("\nEnter a Rate: ")
@@ -120,12 +119,12 @@ while True:
             else:
                 break                  
 
-        data.append(f"{user_restaurante}: {user_rate}")   
+        data.append(f"{user_restaurant}: {user_rate}")   
 
     elif user_choice == 3:   
-        update_restaurante = input("\nWhich Item would you like to update? ").title()
+        update_restaurant = input("\nWhich Item would you like to update? ").title()
         new_rate = input("\nWhat rate do you want to rate this Item with? Please enter a number from 1 to 5: ")
-        data.append(f"{update_restaurante.title()}: {new_rate}")
+        data.append(f"{update_restaurant.title()}: {new_rate}")
 
     elif user_choice == 4:          
         file = choose_file(list_of_files_to_choose)
