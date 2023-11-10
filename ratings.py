@@ -65,7 +65,7 @@ def choose_file(list_of_files):
 
 
     for num in range(0, len(list_of_files)):
-        print(f"{num}. {list_of_files[num]}")
+        print(f"{num+1}. {list_of_files[num]}")
 
 
     work_file = int(input(f"Press the number of file you would you like to open: "))
@@ -112,9 +112,23 @@ while True:
         while True:           
             user_rate = input("\nEnter a Rate: ")
 
+            # try:
+            #     user_rate = int(input("\nEnter a Rate: "))
+            #     if user_rate < 1 or user_rate > 5:
+            #         print("Please give a rate between 1 and 5: ")
+            #         continue
+            #     data.append(f"{user_restaurant}: {user_rate}")
+            # except ValueError as error:
+            #     print(f"{error}\nYou should provide a number.")                
+            # else:
+            #     break    
+
             if not user_rate.isdigit():
+                print("You should provide a number.")
                 continue
-            if user_rate not in "12345":
+            user_rate = int(user_rate)
+            if user_rate < 1 or user_rate > 5:
+                print("Please give a rate between 1 and 5: ")
                 continue
             else:
                 break                  
@@ -123,6 +137,7 @@ while True:
 
     elif user_choice == 3:   
         update_restaurant = input("\nWhich Item would you like to update? ").title()
+        #Todo: Check if the item exists firts before asking for a rate
         new_rate = input("\nWhat rate do you want to rate this Item with? Please enter a number from 1 to 5: ")
         data.append(f"{update_restaurant.title()}: {new_rate}")
 
